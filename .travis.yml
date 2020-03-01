@@ -27,7 +27,7 @@ install:
 
 script:
   - cd ./public
-  - ll
+  - ls
   - git init
   - git config user.name "wbmins"
   - git config user.email "wbminions@gmail.com"
