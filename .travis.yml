@@ -26,6 +26,7 @@ install:
   - hugo
 
 script:
+  - ls
   - cd ./public
   - ls
   - git init
