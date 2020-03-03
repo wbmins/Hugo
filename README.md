@@ -4,7 +4,6 @@
 [![Build Status](https://travis-ci.org/wbmins/Hugo.svg?branch=master)](https://travis-ci.org/wbmins/Hugo)
 ![language](https://img.shields.io/badge/framework-hugo-orange.svg)
 ![Slack](https://img.shields.io/badge/slack-996icu-green.svg?style=flat-square)
-[![codecov](https://codecov.io/gh/wbmins/Hugo/branch/master/graph/badge.svg)](https://codecov.io/gh/wbmins/Hugo)
 
 主题使用的是 [LeaveIt](https://github.com/liuzc/LeaveIt)
 
