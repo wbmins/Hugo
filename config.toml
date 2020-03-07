@@ -38,7 +38,7 @@ preserveTaxonomyNames = true
     subtitle = "Don't make the choice if you dislike, once you make the decision, please hold on"                  # Subtitle
     cdn_url = ""           # Base CDN URL
     home_mode = "" # post or other
-    enableGitalk = true # gitalk 评论系统
+    enableGitalk = false # gitalk 评论系统
     google_verification = ""
     description = "Pluto的博客" # (Meta) 描述
     keywords = "blog, Hugo, Linux, Git, Manjaro" # site keywords
@@ -67,3 +67,15 @@ preserveTaxonomyNames = true
     pagerDirection= "last" # Comment sorting direction, available values are 'last' and 'first'.
     createIssueManually= true # If it is 'false', it is auto to make a Github issue when the administrators login.
     distractionFreeMode= false # Enable hot key (cmd|ctrl + enter) submit comment.
+# Valine.
+  # You can get your appid and appkey from https://leancloud.cn
+  # more info please open https://valine.js.org
+  [params.valine]
+    enable = true
+    appId = 'UykWYSyDvR8ypSWopSPPmyTI-gzGzoHsz'
+    appKey = 'IvnGNcm8NUYCbJ7xKKIr6nMn'
+    notify = false  # mail notifier , https://github.com/xCss/Valine/wiki
+    verify = false # Verification code
+    avatar = 'mm'
+    placeholder = '说点什么吧...'
+    visitor = true
