@@ -10,7 +10,7 @@ description:  #描述
 
 # IDEA
 
-## 方法之间加分割线
+## 方法间加分割线
 
 - File | Settings | Editor | General | Appearance | Show method separators
 
