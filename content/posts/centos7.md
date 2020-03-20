@@ -22,6 +22,49 @@ description:  #描述
 
 - 常用的软件包
 
-    
+    - openjdk
+
+    - gitea
+
+    - docker
+
+    - mysql
+
+    - jenkins
+
+    - git
+
+    - zsh
+
+    - nmap (测试某个端口是否开启)  `nmap xxx.xxx.xxx.xxx`
+
+### 防火墙
+
+- 开启
+
+```txt
+firewall-cmd --zone=public --add-port=5672/tcp --permanent   # 开放5672端口
+```
+
+- 关闭
+
+```txt
+firewall-cmd --zone=public --remove-port=5672/tcp --permanent  #关闭5672端口
+```
+
+- 生效
+
+```txt
+firewall-cmd --reload   # 配置立即生效
+```
+
+- 查看
+
+```txt
+firewall-cmd --zone=public --list-ports //查看开放端口
+firewall-cmd --zone=public --list-ports //防火墙状态
+netstat -lnpt //查看监听的端口
+```
+
 
 
