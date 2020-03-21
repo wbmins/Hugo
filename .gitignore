@@ -2,3 +2,6 @@ public/*
 # themes/*
 resources/*
 .vscode/*
+*.iml
+/code/.idea/
+/code/out/
