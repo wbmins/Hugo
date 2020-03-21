@@ -47,6 +47,12 @@ public void test(){
 
 - 选中代码块抽成方法 `ctrl + alt + M`
 
+- 方法展开和折叠
+
+    - 单个 `ctrl + +/-`
+
+    - 所有 `crtl + shift + +/-`
+
 
 
 
