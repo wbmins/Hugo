@@ -22,7 +22,7 @@ jobs:
         # extended: true
 
     - name: Build
-      run: hugo --minify
+      uses: jakejarvis/hugo-build-action@master
 
     - name: Deploy
       uses: peaceiris/actions-gh-pages@v2.5.0
