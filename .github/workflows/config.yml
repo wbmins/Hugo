@@ -22,5 +22,5 @@ jobs:
         GH_USERNAME: wbmins
         GH_REPO: github.com/wbmins/wbmins.github.io
         GH_BRANCH: master
-        GH_TOKEN: ${{ ACTIONS_DEPLOY_KEY }}
+        GH_TOKEN: ${{ secrets.DEPLOY_TOKEN }}
         WORK_DIR: "./public"
