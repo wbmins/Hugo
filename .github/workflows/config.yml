@@ -25,7 +25,7 @@ jobs:
       uses: jakejarvis/hugo-build-action@master
 
     - name: Deploy
-      uses: peaceiris/actions-gh-pages@v2.5.0
+      uses: wbmins/git-push@master
       env:
         ACTIONS_DEPLOY_KEY: ${{ secrets.ACTIONS_DEPLOY_KEY}}
         # 你的github page分支
