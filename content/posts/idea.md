@@ -43,6 +43,10 @@ public void test(){
 }
 ```
 
+### 快捷键
+
+- 选中代码块抽成方法 `ctrl + alt + M`
+
 
 
 
