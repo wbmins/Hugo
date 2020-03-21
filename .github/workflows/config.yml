@@ -26,8 +26,8 @@ jobs:
 
     - name: Deploy
       uses: wbmins/git-push@master
-      env:
-        GH_EMAIL: 1358258634@qq.com
+      with:
+        GH_EMAIL: wbminions@gmail.com
         GH_USERNAME: wbmins
         GH_REPO: github.com/wbmins/wbmins.github.io
         GH_BRANCH: master
