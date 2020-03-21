@@ -1,30 +1,26 @@
-name: github pages
-
-on:
-  push:
-    branches:
-      - ll
+name: Build & Deploy
+on: [push, pull_request]
 
 jobs:
-  deploy:
-    runs-on: ubuntu-18.04
+  build-and-deploy:
+    runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
-        # with:
-        #   submodules: true
+    - name: Checkout
+      uses: actions/checkout@master
+      with:
+          submodules: true
+          fetch-depth: 1
 
-      - name: Setup Hugo
-        uses: peaceiris/actions-hugo@v2
-        with:
-          hugo-version: '0.65.3'
+    - name: Build site
+      uses: jakejarvis/hugo-build-action@master
 
-      - name: Build
-        run: hugo
+    - name: Deploy to GitHub
+      uses: wbmins/git-push@master
 
-      - name: Deploy
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          deploy_key: ${{ secrets.ACTIONS_DEPLOY_KEY }}
-          EXTERNAL_REPOSITORY: wbmins/wbmins.github.io
-          PUBLISH_BRANCH: master
-          PUBLISH_DIR: ./public
+      with:
+        GH_EMAIL: 1358258634@qq.com
+        GH_USERNAME: wbmins
+        GH_REPO: github.com/wbmins/wbmins.github.io
+        GH_BRANCH: master
+        GH_TOKEN: ${{ ACTIONS_DEPLOY_KEY }}
+        WORK_DIR: "./public"
