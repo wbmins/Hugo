@@ -1,7 +1,7 @@
 # <center>My Blog</center>
 
 
-[![Build Status](https://travis-ci.org/wbmins/Hugo.svg?branch=master)](https://travis-ci.org/wbmins/Hugo)
+![Build & Deploy](https://github.com/wbmins/Hugo/workflows/Build%20&%20Deploy/badge.svg)
 ![language](https://img.shields.io/badge/framework-hugo-orange.svg)
 ![Slack](https://img.shields.io/badge/slack-996icu-green.svg?style=flat-square)
 
