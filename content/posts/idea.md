@@ -53,6 +53,8 @@ public void test(){
 
     - 所有 `crtl + shift + +/-`
 
+- 查看帮助文档 `ctrl + q` 
+
 
 
 
