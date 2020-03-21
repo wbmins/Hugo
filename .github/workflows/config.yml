@@ -1,31 +1,19 @@
-name: build & deploy
-on:
-  push:
-    branches:
-    # 你的hugo源码分支
-    - master
+name: Build & Deploy
+on: [push, pull_request]
 
 jobs:
-  build-deploy:
-    runs-on: ubuntu-18.04
+  build-and-deploy:
+    runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v1
-      # 如果使用了git submodules
+    - name: Checkout
+      uses: actions/checkout@master
       with:
-        submodules: true
-        fetch-depth: 1
-
-    - name: Setup Hugo
-      uses: peaceiris/actions-hugo@v2
-      with:
-        hugo-version: '0.59.1'
-        # extended: true
-
-    - name: Build
+          submodules: true
+          fetch-depth: 1
+    - name: Build site
       uses: jakejarvis/hugo-build-action@master
-
-    - name: Deploy
-      uses: JamesIves/github-pages-deploy-action
+    - name: Deploy to GitHub
+      uses: Mogeko/git-push@master
       with:
         GH_EMAIL: wbminions@gmail.com
         GH_USERNAME: wbmins
