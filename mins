@@ -1,10 +1,10 @@
 #!/bin/bash
 
-:`
+:'
 auther: wbmins
 email: wbminions@gmail.com
 description: a convenient git and hugo shell
-`
+'
 
 push() {
     git add .
