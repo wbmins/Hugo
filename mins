@@ -1,9 +1,14 @@
 #!/bin/bash
 
 : '
-auther: wbmins
-email: wbminions@gmail.com
-description: a convenient git and hugo shell
+uasr: wbmins
+mail: wbminions@gmail.com
+desc: a convenient git and hugo shell
+'
+
+: '
+desc: commit and push
+args: commit msg
 '
 
 push() {
@@ -12,10 +17,19 @@ push() {
     git push -u origin master
 }
 
+
+: '
+desc: hugo localhost
+args: none
+'
 server() {
     hugo server -D
 }
 
+: '
+desc: created a hugo blog
+args: filename
+'
 new() {
     hugo new posts/$1.md
 }
