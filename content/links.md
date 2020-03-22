@@ -14,9 +14,9 @@ description:  #描述
 
 - **MikuTools** &nbsp;&nbsp;&nbsp;&nbsp; https://tools.miku.ac/en
 
-## With
+## Status
 
-- ![build](https://github.com/wbmins/Hugo/workflows/build/badge.svg) &nbsp;&nbsp;&nbsp;&nbsp; ![language](https://img.shields.io/badge/framework-hugo-orange.svg) &nbsp;&nbsp;&nbsp;&nbsp; ![Slack](https://img.shields.io/badge/slack-996icu-green.svg?style=flat-square)
+![build](https://github.com/wbmins/Hugo/workflows/build/badge.svg)
 
 ## Todo
 
