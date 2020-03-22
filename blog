@@ -1,7 +1,5 @@
 #!/bin/bash
 
-NOW_PATH=`pwd`
-
 push() {
     git add .
     git commit -m "$1"
@@ -9,34 +7,19 @@ push() {
 }
 
 server() {
-    cd $BLOG_PATH
-    hugo server
-    cd $NOW_PATH
+    hugo server -D
 }
 
 new() {
-    cd $BLOG_PATH
-    num=0
-    while true; do
-        file_num=`echo ${num}|awk '{printf("%03d\n", $0)}'`
-        file="$BLOG_PATH/content/posts/${file_num}.md"
-        if test -f $file; then
-            let num+=1
-        else
-            hugo new posts/${file_num}.md
-            mkdir static/blog-images/${file_num}
-            break
-        fi
-    done
-    cd $NOW_PATH
+    hugo new posts/$1.md
 }
 
 if [ ! -z "$1" ]; then
     if [ "$1" == "push" ]; then
-        echo "===start==="
         push "$2"
-        echo "=== end ==="
+    fi
+    if [ "$1" == "new" ]; then
+        new "$2"
     fi
     [ "$1" == "server" ] && server
-    [ "$1" == "new" ] && new
 fi
