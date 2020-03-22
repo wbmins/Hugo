@@ -2,8 +2,6 @@
 title: "Links"
 date: 2020-03-22T00:07:49+08:00
 draft: false
-tags: [] #标签
-categories: [""] #分类
 featured_image: #顶部图片
 description:  #描述
 ---
@@ -14,6 +12,13 @@ description:  #描述
 
 ## Tools
 
+- **MikuTools** &nbsp;&nbsp;&nbsp;&nbsp; https://tools.miku.ac/en
+
+## With
+
+![Build & Deploy](https://github.com/wbmins/Hugo/workflows/build/badge.svg)
+![language](https://img.shields.io/badge/framework-hugo-orange.svg)
+![Slack](https://img.shields.io/badge/slack-996icu-green.svg?style=flat-square)
 
 ## Todo
 
