@@ -16,7 +16,7 @@ description:  #描述
 
 ## Status
 
-- ![build](https://github.com/wbmins/Hugo/workflows/build/badge.svg)
+- <img src="https://github.com/wbmins/Hugo/workflows/build/badge.svg" align="left" />
 
 ## Todo
 
