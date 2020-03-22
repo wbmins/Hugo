@@ -3,7 +3,6 @@
 NOW_PATH=`pwd`
 
 push() {
-    #cd $1
     git add .
     git commit -m $1
     git push
@@ -36,14 +35,9 @@ new() {
 
 if [ ! -z "$1" ]; then
     if [ "$1" == "push" ]; then
-        echo "===Push Images==="
-        push $BLOG_PATH/static/blog-images
-        echo ""
-        echo "===Push Posts==="
-        push $BLOG_PATH
+        echo "===push==="
+        push $2
     fi
     [ "$1" == "server" ] && server
     [ "$1" == "new" ] && new
-else
-    cd $BLOG_PATH
 fi
