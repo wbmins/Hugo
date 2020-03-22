@@ -10,9 +10,15 @@ description:  #描述
 
 - **Github Repositories Ranking** &nbsp;&nbsp;&nbsp;&nbsp; https://gitstar-ranking.com/repositories
 
+- **Programming Language Ranking** &nbsp;&nbsp;&nbsp;&nbsp; https://www.tiobe.com/tiobe-index/
+
 ## Tools
 
 - **MikuTools** &nbsp;&nbsp;&nbsp;&nbsp; https://tools.miku.ac/en
+
+## Game
+
+- **ClashofClans** &nbsp;&nbsp;&nbsp;&nbsp; https://www.clashofstats.com/cn/players/28V29LC2G/summary
 
 ## Todo
 
