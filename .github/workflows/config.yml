@@ -1,5 +1,8 @@
 name: build
-on: [push, pull_request]
+on:
+  push: # push的时候触发
+    branches: # 那些分支需要触发
+      - master
 
 jobs:
   build-and-deploy:
