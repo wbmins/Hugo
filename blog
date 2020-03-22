@@ -4,10 +4,8 @@ NOW_PATH=`pwd`
 
 push() {
     git add .
-    git commit -m $1
-    git push
-    cd $NOW_PATH
-
+    git commit -m "$1"
+    git push -u origin master
 }
 
 server() {
@@ -35,8 +33,9 @@ new() {
 
 if [ ! -z "$1" ]; then
     if [ "$1" == "push" ]; then
-        echo "===push==="
-        push $2
+        echo "===start==="
+        push "$2"
+        echo "=== end ==="
     fi
     [ "$1" == "server" ] && server
     [ "$1" == "new" ] && new
