@@ -16,7 +16,7 @@ description:  #描述
 
 ## Status
 
-- <img src="https://github.com/wbmins/Hugo/workflows/build/badge.svg" align="left" />
+<img src="https://github.com/wbmins/Hugo/workflows/build/badge.svg" align="left" />
 
 ## Todo
 
