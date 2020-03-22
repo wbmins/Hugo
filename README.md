@@ -1,5 +1,4 @@
-# <center>My Blog</center>
-
+<center>Pluto`s Blog Code</center>
 
 ![build](https://github.com/wbmins/Hugo/workflows/build/badge.svg)
 ![language](https://img.shields.io/badge/framework-hugo-orange.svg)

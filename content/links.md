@@ -14,10 +14,6 @@ description:  #描述
 
 - **MikuTools** &nbsp;&nbsp;&nbsp;&nbsp; https://tools.miku.ac/en
 
-## Status
-
-<img src='https://github.com/wbmins/blog/workflows/build/badge.svg' style='float:right;'/>
-
 ## Todo
 
-- Add url icon
+- Add url icon 
