@@ -16,7 +16,7 @@ description:  #描述
 
 ## With
 
-![Build & Deploy](https://github.com/wbmins/Hugo/workflows/build/badge.svg) &nbsp;&nbsp;&nbsp;&nbsp; ![language](https://img.shields.io/badge/framework-hugo-orange.svg) &nbsp;&nbsp;&nbsp;&nbsp; ![Slack](https://img.shields.io/badge/slack-996icu-green.svg?style=flat-square)
+- ![build](https://github.com/wbmins/Hugo/workflows/build/badge.svg) &nbsp;&nbsp;&nbsp;&nbsp; ![language](https://img.shields.io/badge/framework-hugo-orange.svg) &nbsp;&nbsp;&nbsp;&nbsp; ![Slack](https://img.shields.io/badge/slack-996icu-green.svg?style=flat-square)
 
 ## Todo
 

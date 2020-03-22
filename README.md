@@ -1,7 +1,7 @@
 # <center>My Blog</center>
 
 
-![Build & Deploy](https://github.com/wbmins/Hugo/workflows/build/badge.svg)
+![build](https://github.com/wbmins/Hugo/workflows/build/badge.svg)
 ![language](https://img.shields.io/badge/framework-hugo-orange.svg)
 ![Slack](https://img.shields.io/badge/slack-996icu-green.svg?style=flat-square)
 
