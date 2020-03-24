@@ -10,8 +10,6 @@ description:  #描述
 
 ## 使用范例    `git commit -m ":tada: Initialize Repo"`
 
-## [emoji 使用指南](https://github.com/liuchengxu/git-commit-emoji-cn#emoji-%E6%8C%87%E5%8D%97)
-
 ## emoji 指南
 
 emoji                                   | 代码                         | 说明                             |emoji                                   | 代码                         | 说明
@@ -33,3 +31,7 @@ emoji                                   | 代码                         | 说�
 :lock: (锁)                             | lock                     | 修复安全问题      |:whale: (鲸鱼)                          | whale                    | Docker 相关工作
 :apple: (苹果)                          | apple                    | 修复 macOS 下的问题|:penguin: (企鹅)                        | penguin                  | 修复 Linux 下的问题
 :checkered_flag: (旗帜)                 | checkered_flag           | 修复 Windows 下的问题|:twisted_rightwards_arrows: (交叉箭头)   | twisted_rightwards_arrows| 分支合并
+
+## 参考链接
+
+- [emoji 使用指南](https://github.com/liuchengxu/git-commit-emoji-cn#emoji-%E6%8C%87%E5%8D%97)
