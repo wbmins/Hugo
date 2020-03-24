@@ -8,11 +8,11 @@ featured_image: #顶部图片
 description:  #描述
 ---
 
-### 使用范例    `git commit -m ":tada: Initialize Repo"`
+## 使用范例    `git commit -m ":tada: Initialize Repo"`
 
-### [emoji 使用指南](https://github.com/liuchengxu/git-commit-emoji-cn#emoji-%E6%8C%87%E5%8D%97)
+## [emoji 使用指南](https://github.com/liuchengxu/git-commit-emoji-cn#emoji-%E6%8C%87%E5%8D%97)
 
-### emoji 指南
+## emoji 指南
 
 emoji                                   | 代码                         | 说明                             |emoji                                   | 代码                         | 说明
 :--------                               | :--------                    | :--------                        |:--------                               | :--------                    | :--------
@@ -23,9 +23,9 @@ emoji                                   | 代码                         | 说�
 :rotating_light: (警车灯)               | rotating_light           | 移除 linter 警告  |:wrench: (扳手)                         | wrench                   | 修改配置文件
 :heavy_plus_sign: (加号)                | heavy_plus_sign          | 增加一个依赖      |:heavy_minus_sign: (减号)               | heavy_minus_sign         | 减少一个依赖
 :arrow_up: (上升箭头)                   | arrow_up                 | 升级依赖          |:arrow_down: (下降箭头)                 | arrow_down               | 降级依赖
-:zap: (闪电)<br>:racehorse: (赛马)      | zap<br>racehorse      | 提升性能         |:chart_with_upwards_trend: (上升趋势图) | chart_with_upwards_trend | 添加分析或跟踪代码
+:zap: (闪电)/:racehorse: (赛马)      | zap/racehorse      | 提升性能         |:chart_with_upwards_trend: (上升趋势图) | chart_with_upwards_trend | 添加分析或跟踪代码
 :rocket: (火箭)                         | rocket                   | 部署功能          |:white_check_mark: (白色复选框)         | white_check_mark           | 增加测试
-:memo: (备忘录)<br>:book: (书)          | memo<br>book          | 撰写文档         |:hammer: (锤子)                         | hammer                   | 重大重构
+:memo: (备忘录)/:book: (书)          | memo/book          | 撰写文档         |:hammer: (锤子)                         | hammer                   | 重大重构
 :art: (调色板)                          | art                      | 改进代码结构/代码格式|:fire: (火焰)                           | fire                     | 移除代码或文件
 :pencil2: (铅笔)                        | pencil2                  | 修复 typo         |:construction: (施工)                   | construction             | 工作进行中
 :wastebasket: (垃圾桶)                  | wastebasket              | 废弃或删除        |:wheelchair: (轮椅)                     | wheelchair               | 可访问性
@@ -33,4 +33,3 @@ emoji                                   | 代码                         | 说�
 :lock: (锁)                             | lock                     | 修复安全问题      |:whale: (鲸鱼)                          | whale                    | Docker 相关工作
 :apple: (苹果)                          | apple                    | 修复 macOS 下的问题|:penguin: (企鹅)                        | penguin                  | 修复 Linux 下的问题
 :checkered_flag: (旗帜)                 | checkered_flag           | 修复 Windows 下的问题|:twisted_rightwards_arrows: (交叉箭头)   | twisted_rightwards_arrows| 分支合并
-

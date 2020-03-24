@@ -10,15 +10,13 @@ description:  #描述
 
 # IDEA
 
-## 方法间加分割线
+## 1、配置
 
-- File | Settings | Editor | General | Appearance | Show method separators
+1. 方法间加分割线 `File | Settings | Editor | General | Appearance | Show method separators`
 
-## 模板
+## 2、模板
 
-### 类模板
-
-- File | Settings | Editor | File and Code Templates | File Header 
+1. 类模板 `File | Settings | Editor | File and Code Templates | File Header`
 
 ```java
 /**
@@ -29,32 +27,24 @@ description:  #描述
  */
 ```
 
-### 方法模板
+2. 方法模板 `File | Settings | Editor | Live Templates |` 点击右面的+ 创建自己的一个模板(Template Group)组然后再添加(Live Template)
 
-- File | Settings | Editor | Live Templates | 
-
-> 点击右面的+ 创建自己的一个模板(Template Group)组然后再添加(Live Template)
-
-```java 
+```java
 //创建测试
 @Test
 public void test(){
-    
+
 }
 ```
 
-### 快捷键
+## 3、快捷键
 
 - 选中代码块抽成方法 `ctrl + alt + M`
 
 - 方法展开和折叠
 
-    - 单个 `ctrl + +/-`
+  - 单个 `ctrl + +/-`
 
-    - 所有 `crtl + shift + +/-`
+  - 所有 `crtl + shift + +/-`
 
-- 查看帮助文档 `ctrl + q` 
-
-
-
-
+- 查看帮助文档 `ctrl + q`

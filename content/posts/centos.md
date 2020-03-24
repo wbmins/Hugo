@@ -10,9 +10,7 @@ description:  #描述
 
 # centos7 配置
 
-## 常用的命令
-
-### 软件
+## 1、软件
 
 - yum install xxx //安装xxx
 
@@ -22,23 +20,23 @@ description:  #描述
 
 - 常用的软件包
 
-    - openjdk
+  - openjdk
 
-    - gitea
+  - gitea
 
-    - docker
+  - docker
 
-    - mysql
+  - mysql
 
-    - jenkins
+  - jenkins
 
-    - git
+  - git
 
-    - zsh
+  - zsh
 
-    - nmap (测试某个端口是否开启)  `nmap xxx.xxx.xxx.xxx`
+  - nmap (测试某个端口是否开启)  `nmap xxx.xxx.xxx.xxx`
 
-### 防火墙
+## 2、防火墙
 
 - 开启
 
@@ -66,17 +64,14 @@ firewall-cmd --zone=public --list-ports //防火墙状态
 netstat -lnpt //查看监听的端口
 ```
 
-### 免密登录
+## 3、免密登录
 
 1. 本地机器终端 `ssh-keygen -t rsa`会在.ssh目录下生成 id_rsa 和 id_rsa.pub 俩个文件
 
-2. 将 id_rsa 上传服务器.ssh目录下` scp id_rsa.pub xx.xx.xx.xx:/root/.ssh/`
+2. 将 id_rsa 上传服务器.ssh目录下`scp id_rsa.pub xx.xx.xx.xx:/root/.ssh/`
 
 3. 登录远程主机`ssh root@xx.xx.xx.xx`
 
 4. 进入.ssh目录下 `cat id_rsa.pub >> authorized_keys`
 
 5. 推出远程链接,然后就可以免密登录了
-
-
-
