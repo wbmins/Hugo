@@ -13,10 +13,10 @@ import java.util.List;
 public class ProxyTest {
 
     @Test
-    public void test1(){
+    public void test1() {
         final List<String> list = new ArrayList<>();
         @SuppressWarnings("unchecked")
-        List<String> proxyInstance = (List<String>)Proxy.newProxyInstance(
+        List<String> proxyInstance = (List<String>) Proxy.newProxyInstance(
                 list.getClass().getClassLoader(),
                 list.getClass().getInterfaces(),
                 (proxy, method, args) -> method.invoke(list, args)

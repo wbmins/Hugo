@@ -11,14 +11,14 @@ import org.junit.Test;
 public class LambdaTest {
 
     @Test
-    public void test(){
+    public void test() {
         new Thread(new Runnable() {
             @Override
             public void run() {
                 System.out.println("hahhahhaha");
             }
-        },"aaaaa").start();
+        }, "aaaaa").start();
 
-        new Thread(() -> System.out.println("hahha"),"aaa").start();
+        new Thread(() -> System.out.println("hahha"), "aaa").start();
     }
 }

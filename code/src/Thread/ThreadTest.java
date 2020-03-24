@@ -18,194 +18,207 @@ import java.util.stream.Stream;
  * @Created by pluto
  */
 
-class MyThread1 extends Thread{
+class MyThread1 extends Thread {
     @Override
     public void run() {
         super.run();
-        System.out.println(Thread.currentThread().getName()+
+        System.out.println(Thread.currentThread().getName() +
                 "我是继承Thread类创建线程");
     }
 }
-class MyThread2 implements Runnable{
+
+class MyThread2 implements Runnable {
     @Override
     public void run() {
-        System.out.println(Thread.currentThread().getName()+
+        System.out.println(Thread.currentThread().getName() +
                 "我是实现Runnable接口创建线程");
     }
 }
-class MyThread3 implements Callable<Integer>{
+
+class MyThread3 implements Callable<Integer> {
     @Override
     public Integer call() throws Exception {
-        System.out.println(Thread.currentThread().getName()+
+        System.out.println(Thread.currentThread().getName() +
                 "我是实现Callable接口创建线程");
         return Integer.valueOf("12");
     }
 }
-class MyData{
+
+class MyData {
     private int num = 0;
     private Lock lock = new ReentrantLock();
     private Condition condition = lock.newCondition();
-    public void inc(){
+
+    public void inc() {
         lock.lock();
-        try{
-            while (num != 0){
+        try {
+            while (num != 0) {
                 condition.await(); //1. 等待不能生产
             }
-            num ++; //2. 生产
-            System.out.println(Thread.currentThread().getName()+
+            num++; //2. 生产
+            System.out.println(Thread.currentThread().getName() +
                     "我是生产者,正在生产");
             condition.signalAll(); //3. 通知
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
-        }finally {
+        } finally {
             lock.unlock();
         }
     }
-    public void dec(){
+
+    public void dec() {
         lock.lock();
-        try{
-            while (num == 0){
+        try {
+            while (num == 0) {
                 condition.await(); //1.等待不能消费
             }
-            num --; //2. 消费
-            System.out.println(Thread.currentThread().getName()+
+            num--; //2. 消费
+            System.out.println(Thread.currentThread().getName() +
                     "我是消费者,正在消费");
             condition.signalAll();
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
-        }finally {
+        } finally {
             lock.unlock();
         }
     }
 }
-class MyDataN{
+
+class MyDataN {
     private volatile boolean FLAG = true;
     private AtomicInteger atomicInteger = new AtomicInteger();
 
     BlockingQueue<String> blockingQueue = null;
-    public MyDataN(BlockingQueue<String> blockingQueue){
+
+    public MyDataN(BlockingQueue<String> blockingQueue) {
         this.blockingQueue = blockingQueue;
     }
-    public void myProd() throws Exception{
+
+    public void myProd() throws Exception {
         String data = null;
         boolean retValue;
-        while (FLAG){
+        while (FLAG) {
             data = atomicInteger.incrementAndGet() + "";
-            retValue = blockingQueue.offer(data,2L,TimeUnit.SECONDS);
-            if(retValue){
-                System.out.println(Thread.currentThread().getName()+
-                        "插入队列"+data+"成功");
-            }else{
-                System.out.println(Thread.currentThread().getName()+
-                        "插入队列"+data+"失败");
+            retValue = blockingQueue.offer(data, 2L, TimeUnit.SECONDS);
+            if (retValue) {
+                System.out.println(Thread.currentThread().getName() +
+                        "插入队列" + data + "成功");
+            } else {
+                System.out.println(Thread.currentThread().getName() +
+                        "插入队列" + data + "失败");
             }
             TimeUnit.SECONDS.sleep(1);
         }
-        System.out.println(Thread.currentThread().getName()+
+        System.out.println(Thread.currentThread().getName() +
                 "大老板叫停");
     }
-    public void myConsumer() throws Exception{
+
+    public void myConsumer() throws Exception {
         String result = null;
-        while (FLAG){
-            result = blockingQueue.poll(2L,TimeUnit.SECONDS);
-            if(null == result || result.equalsIgnoreCase("")){
-                System.out.println(Thread.currentThread().getName()+
+        while (FLAG) {
+            result = blockingQueue.poll(2L, TimeUnit.SECONDS);
+            if (null == result || result.equalsIgnoreCase("")) {
+                System.out.println(Thread.currentThread().getName() +
                         "超过2秒钟没有渠道蛋糕,消费退出");
                 return;
             }
-            System.out.println(Thread.currentThread().getName()+
-                    "消费数据"+result+"成功");
+            System.out.println(Thread.currentThread().getName() +
+                    "消费数据" + result + "成功");
         }
     }
-    public void stop(){
+
+    public void stop() {
         this.FLAG = false;
     }
 }
+
 public class ThreadTest {
     public static void main(String[] args) {
         test();
     }
+
     /**
      * SynchronousQueue测试
      * 该方法需要在main里面
      */
-    public static void test(){
+    public static void test() {
         BlockingQueue<String> blockingQueue = new SynchronousQueue<>();
         new Thread(() -> {
             try {
-                System.out.println(Thread.currentThread().getName()+
+                System.out.println(Thread.currentThread().getName() +
                         "------put 1");
                 blockingQueue.put("1");
-                System.out.println(Thread.currentThread().getName()+
+                System.out.println(Thread.currentThread().getName() +
                         "------put 2");
                 blockingQueue.put("2");
-                System.out.println(Thread.currentThread().getName()+
+                System.out.println(Thread.currentThread().getName() +
                         "------put 3");
                 blockingQueue.put("3");
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-        },"AAA").start();
+        }, "AAA").start();
         new Thread(() -> {
             try {
-                try{
+                try {
                     TimeUnit.SECONDS.sleep(3);
-                }catch (Exception e){
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
-                System.out.println(Thread.currentThread().getName()+
-                        "------"+blockingQueue.take());
+                System.out.println(Thread.currentThread().getName() +
+                        "------" + blockingQueue.take());
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
             try {
-                try{
+                try {
                     TimeUnit.SECONDS.sleep(3);
-                }catch (Exception e){
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
-                System.out.println(Thread.currentThread().getName()+
-                        "------"+blockingQueue.take());
+                System.out.println(Thread.currentThread().getName() +
+                        "------" + blockingQueue.take());
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
             try {
-                try{
+                try {
                     TimeUnit.SECONDS.sleep(3);
-                }catch (Exception e){
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
-                System.out.println(Thread.currentThread().getName()+
-                        "------"+blockingQueue.take());
+                System.out.println(Thread.currentThread().getName() +
+                        "------" + blockingQueue.take());
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-        },"BBB").start();
+        }, "BBB").start();
     }
+
     /**
      * 现在阻塞队列版生产消费
      */
     @Test
-    public void now(){
+    public void now() {
         MyDataN myDataN = new MyDataN(new ArrayBlockingQueue<String>(10));
         new Thread(() -> {
-            try{
+            try {
                 myDataN.myProd();
-            }catch (Exception e){
+            } catch (Exception e) {
                 e.printStackTrace();
             }
-        },"AA").start();
+        }, "AA").start();
         new Thread(() -> {
-            try{
+            try {
                 myDataN.myConsumer();
-            }catch (Exception e){
+            } catch (Exception e) {
                 e.printStackTrace();
             }
-        },"BB").start();
+        }, "BB").start();
 
-        try{
+        try {
             TimeUnit.SECONDS.sleep(5);
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         System.out.println("5秒结束,main打老板叫停");
@@ -221,26 +234,26 @@ public class ThreadTest {
             @Override
             public void run() {
                 for (int i = 0; i < 5; i++) {
-                    try{
-                    myData.inc();
-                    }catch (Exception e){
+                    try {
+                        myData.inc();
+                    } catch (Exception e) {
                         e.printStackTrace();
                     }
                 }
             }
-        },"AA").start();
+        }, "AA").start();
         new Thread(new Runnable() {
             @Override
             public void run() {
                 for (int i = 0; i < 5; i++) {
-                    try{
-                    myData.dec();
-                    }catch (Exception e){
+                    try {
+                        myData.dec();
+                    } catch (Exception e) {
                         e.printStackTrace();
                     }
                 }
             }
-        },"BB").start();
+        }, "BB").start();
     }
 
     /**
@@ -249,14 +262,14 @@ public class ThreadTest {
     @Test
     public void test4_3() {
         ExecutorService executorService3 = Executors.newCachedThreadPool();
-        try{
+        try {
             for (int i = 0; i < 10; i++) {
-                executorService3.execute(() -> System.out.println(Thread.currentThread().getName()+
+                executorService3.execute(() -> System.out.println(Thread.currentThread().getName() +
                         "带缓冲的线程池中的线程"));
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
-        }finally {
+        } finally {
             executorService3.shutdown();
         }
     }
@@ -267,14 +280,14 @@ public class ThreadTest {
     @Test
     public void test4_2() {
         ExecutorService executorService2 = Executors.newFixedThreadPool(5);
-        try{
+        try {
             for (int i = 0; i < 6; i++) {
-                executorService2.execute(() -> System.out.println(Thread.currentThread().getName()+
+                executorService2.execute(() -> System.out.println(Thread.currentThread().getName() +
                         "我是固定数目线程池中的线程"));
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
-        }finally {
+        } finally {
             executorService2.shutdown();
         }
     }
@@ -288,15 +301,15 @@ public class ThreadTest {
         executorService1.execute(new Runnable() {
             @Override
             public void run() {
-                System.out.println(Thread.currentThread().getName()+"我是单线程池中的线程");
+                System.out.println(Thread.currentThread().getName() + "我是单线程池中的线程");
             }
         });
-        try{
-            executorService1.execute(() -> System.out.println(Thread.currentThread().getName()+
+        try {
+            executorService1.execute(() -> System.out.println(Thread.currentThread().getName() +
                     "我是线程池Lambda创建线程"));
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
-        }finally {
+        } finally {
             executorService1.shutdown();
         }
     }
@@ -308,13 +321,13 @@ public class ThreadTest {
     public void test3() {
         MyThread3 myThread3 = new MyThread3();
         FutureTask<Integer> futureTask = new FutureTask<>(myThread3);
-        Thread thread = new Thread(futureTask,"futureTask");
+        Thread thread = new Thread(futureTask, "futureTask");
         thread.start();
         try {
-            while (!futureTask.isDone()){ //等算完再取值
+            while (!futureTask.isDone()) { //等算完再取值
             }
             System.out.println("********result+" + futureTask.get()); //方法尽量往后放
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

@@ -48,3 +48,5 @@ public void test(){
   - 所有 `crtl + shift + +/-`
 
 - 查看帮助文档 `ctrl + q`
+
+- 格式化代码 `shift + alt + l`
