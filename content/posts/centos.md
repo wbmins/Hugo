@@ -20,19 +20,23 @@ description:  #描述
 
 - 常用的软件包
 
-  - openjdk
+  - openjdk (java　必备)
 
-  - gitea
+  - gitea　 (类似github)
 
-  - docker
+  - docker  (容器引擎)
 
-  - mysql
+  - mysql　 (数据库)
 
-  - jenkins
+  - jenkins (CI)
 
-  - git
+  - git     ()
 
-  - zsh
+  - httpd
+
+  - nextcloud (云盘)
+
+  - zsh     (终端)
 
   - nmap (测试某个端口是否开启)  `nmap xxx.xxx.xxx.xxx`
 
