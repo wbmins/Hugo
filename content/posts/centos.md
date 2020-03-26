@@ -18,27 +18,84 @@ description:  #描述
 
 - yum localinstall xxx.rpm //安装本地xxx(网络不好使)
 
-- 常用的软件包
+### 常用的软件
 
-  - openjdk (java　必备)
+- openjdk   (java　必备)
 
-  - gitea　 (类似github)
+- gitea　   (类似github)
 
-  - docker  (容器引擎)
+```bash
+docker run -d --name=gitea \
+#端口映射3000(宿主机):3000(容器)
+-p 10022:22 -p 3000:3000 \
+#数据存储位置(宿主机):(容器)
+-v /root/gitea:/data gitea/gitea:latest
+```
 
-  - mysql　 (数据库)
+- docker    (容器引擎)
 
-  - jenkins (CI)
+  - 配置 `/etc/docker/daemon.json`
 
-  - git     ()
+  - 注册阿里源　<https://cr.console.aliyun.com/cn-qingdao/mirrors>
 
-  - httpd
+  - 写入阿里 docker 镜像加速地址
 
-  - nextcloud (云盘)
+```bash
+docker search xxx  #搜索镜像
+docker images      #查看已安装镜像
+docker rmi name/id #删除镜像名字活id
+docker pull xxx    #拉去镜像
+docker ps          #正在运行容器
+docker ps -a
+docker rm -f
+docker attach 容器ID
+docker exec -it 容器ID /bin/bash
+```
 
-  - zsh     (终端)
+- mysql　   (数据库)
 
-  - nmap (测试某个端口是否开启)  `nmap xxx.xxx.xxx.xxx`
+```bash
+#端口映射3306(宿主机):3306(容器)
+docker run -p 3306:3306 --name mysql \
+#数据存储位置(宿主机):(容器)
+-v /root/mysql/conf:/etc/mysql \
+-v /root/mysql/logs:/var/log/mysql \
+-v /root/mysql/data:/var/lib/mysql \
+#mysqlroot密码
+-e MYSQL_ROOT_PASSWORD=xxx \
+-d mysql
+```
+
+- jenkins   (CI)
+
+- git       ()
+
+- httpd     ()
+
+- nextcloud (云盘)
+
+```bash
+docker run -d \
+# 别名
+--name nextcloud \
+#端口映射8080(宿主机):80(容器)
+-p 8080:80 \
+-v /root/cloud:/var/www/html \
+nextcloud
+```
+
+- zsh       (终端)
+
+- nmap (测试某个端口是否开启)  `nmap xxx.xxx.xxx.xxx`
+
+```bash
+# open(正常)cloused(关闭状态)
+22/tcp   open   ssh
+80/tcp   open   http
+3000/tcp open   ppp
+3306/tcp open   mysql
+8080/tcp open   http-proxy
+```
 
 ## 2、防火墙
 
@@ -79,3 +136,13 @@ netstat -lnpt //查看监听的端口
 4. 进入.ssh目录下 `cat id_rsa.pub >> authorized_keys`
 
 5. 推出远程链接,然后就可以免密登录了
+
+## 4、禁用ip_v6
+
+- `vim /etc/default/grub`
+
+- 第六行改为 `GRUB_CMDLINE_LINUX="ipv6.disable=1 crashkernel=auto   net.ifnames=0 console=tty0 console=ttyS0,115200n8"`
+
+- `grub2-mkconfig -o /boot/grub2/grub.cfg`
+
+- `reboot`
