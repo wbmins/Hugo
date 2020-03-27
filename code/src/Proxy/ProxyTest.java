@@ -1,4 +1,4 @@
-package proxy;
+package Proxy;
 
 import org.junit.Test;
 
