@@ -50,3 +50,5 @@ public void test(){
 - 查看帮助文档 `ctrl + q`
 
 - 格式化代码 `shift + alt + l`
+
+- 方法返回定义变量 `ctrl + alt+ v`

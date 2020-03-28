@@ -22,12 +22,443 @@ description:  #描述
 |阻塞IO(Blocking IO)    |非阻塞IO(Non Blocking IO)
 |无                     |选择器(Selectors)
 
-## 3、缓冲区和通道
+## 3、缓冲区(channel 传输)和通道(buffer　存储)
+
+- 通道(buffer)标识打开到IO设备(文件、套接字)的连接.
+
+```java
+public class TestBuffer {
+    /**
+     * 1.缓冲区
+     * ByteBuffer
+     * CharBuffer
+     * ShortBuffer
+     * IntBuffer
+     * LongBuffer
+     * FloatBuffer
+     * DoubleBuffer
+     * 同意通过allocate()获取
+     * 2.缓冲区存取数据核心方法
+     * put()
+     * get()
+     * 3.四个核心属性
+     * capacity:缓冲区最大存储数量,一旦声明不能改变
+     * limit:表示缓冲区可以操作数据的大小
+     * position:表示缓冲区正在操作数据的位置
+     * 0 <= position <= limit <= capacity
+     * mark:标记position位置通过reset()回答mark位置
+     * 4.直接缓冲区于非直接缓冲区
+     * 非直接缓冲区:通过allocate方法分配,建立在jvm内存中
+     * 直接缓冲区:通过allocateDirect()分配,建立在物理内存中,
+     * 可以提高效率
+     */
+    @Test
+    public void test(){
+        String str = "qwerty";
+        ByteBuffer byteBuffer = ByteBuffer.allocate(1024);
+        System.out.println("1.分配指定大小缓冲区---allocate---");
+        System.out.println(byteBuffer.position());
+        System.out.println(byteBuffer.limit());
+        System.out.println(byteBuffer.capacity());
+
+        byteBuffer.put(str.getBytes());
+        System.out.println("2.put存数据到缓冲区---put---");
+        System.out.println(byteBuffer.position());
+        System.out.println(byteBuffer.limit());
+        System.out.println(byteBuffer.capacity());
+
+        byteBuffer.flip();
+        System.out.println("3.切换读数据模式---flip---");
+        System.out.println(byteBuffer.position());
+        System.out.println(byteBuffer.limit());
+        System.out.println(byteBuffer.capacity());
+
+        byte[] bytes = new byte[byteBuffer.limit()];
+        byteBuffer.get(bytes);
+        System.out.println(new String(bytes,0,bytes.length));
+        System.out.println("4.get读取数据---get---");
+        System.out.println(byteBuffer.position());
+        System.out.println(byteBuffer.limit());
+        System.out.println(byteBuffer.capacity());
+
+        byteBuffer.rewind();
+        System.out.println("5.可重复读---rewind---");
+        System.out.println(byteBuffer.position());
+        System.out.println(byteBuffer.limit());
+        System.out.println(byteBuffer.capacity());
+
+        byteBuffer.clear();
+        //但数据还在,处于被遗忘状态
+        System.out.println("6.清除缓冲区---clear---");
+        System.out.println(byteBuffer.position());
+        System.out.println(byteBuffer.limit());
+        System.out.println(byteBuffer.capacity());
+    }
+}
+```
+
+- 使用NIO系统,需要获取用于连接IO设备的通道以及用于容纳数据的缓冲区,然后操作缓冲区,对数据进行处理.
+
+```java
+public class TestChannel {
+    /**
+     * 1.通道和目标节点的连接,负责数据的传输.本身不存储数据
+     * 2.主要实现类
+     * java.nio.channels.channel
+     * |--FileChannel           本地
+     * |--SocketChannel　      网络(tcp)
+     * |--ServerSocketChannel  网络(tcp)
+     * |--DatagramChannel      网络(udp)
+     * 3.1获取通道getChannel()
+     * 本地IO
+     * 　   |--FileInputStream/FileOutputStream
+     * |--RandomAcessFile
+     * 网络IO
+     * 　   |--Socket
+     * |--ServerSocket
+     * |--DatagramSocket
+     * 3.2 jdk nio2
+     * |--通道提供的静态方法open()
+     * |--Files工具类提供的newByteChannel()
+     * 4.通道之间的数据传输
+     * |--transferFrom
+     * |--transferTo
+     * 5.分散和聚集
+     * |--分散读取scatter reads 通道数据分散多个缓冲区
+     * |--聚集写入gather writes　将多个缓冲区聚集到一个通道中
+     * 6.字符集
+     * |--字符串到字符数据
+     * |--字符数据到字符串
+     */
+    //字符集
+    @Test
+    public void test6(){
+        Map<String, Charset> map = Charset.availableCharsets();
+        Set<Map.Entry<String,Charset>> set = map.entrySet();
+        for (Map.Entry<String,Charset> entry : set){
+            System.out.println(entry.getKey()+"==="+entry.getValue());
+        }
+    }
+    //分散读取聚集写入
+    @Test
+    public void test5() throws IOException {
+        RandomAccessFile raf = new RandomAccessFile(
+                "/home/pluto/Download/1.jpg", "rw");
+        //获取通道
+        FileChannel fileChannel = raf.getChannel();
+
+        //分配指定大小缓冲区
+        ByteBuffer byteBuffer = ByteBuffer.allocate(600);
+        ByteBuffer byteBuffer1 = ByteBuffer.allocate(1024);
+
+        //分散读取
+        ByteBuffer[] bf = {byteBuffer,byteBuffer1};
+        //fileChannel.read(bf);
+
+        //聚集写入
+        RandomAccessFile randomAccessFile = new RandomAccessFile(
+                "/home/pluto/Download/2.jpg", "rw");
+        FileChannel fileChannel1 = randomAccessFile.getChannel();
+        fileChannel1.write(bf);
+    }
+
+    //通道数据传输(直接缓冲区)
+    @Test
+    public void test3() throws IOException {
+        FileChannel infileChannel = FileChannel.open(Paths.get(
+                "/home/pluto/Download/1.jpg"), StandardOpenOption.READ);
+        FileChannel outfileChannle = FileChannel.open(Paths.get(
+                "/home/pluto/Download/3.jpg"),
+                StandardOpenOption.WRITE, StandardOpenOption.READ,
+                StandardOpenOption.CREATE);
+
+        infileChannel.transferTo(0, infileChannel.size(), outfileChannle);//下面和这一行效果一样
+        //outfileChannle.transferFrom(infileChannel,0,infileChannel.size());
+        infileChannel.close();
+        outfileChannle.close();
+    }
+
+    //使用直接缓冲区完成文件复制(内存映射文件)
+    @Test
+    public void test1() throws IOException {
+        FileChannel infileChannel = FileChannel.open(Paths.get(
+                "/home/pluto/Download/1.jpg"), StandardOpenOption.READ);
+        FileChannel outfileChannle = FileChannel.open(Paths.get(
+                "/home/pluto/Download/3.jpg"), StandardOpenOption.WRITE,
+                StandardOpenOption.READ, StandardOpenOption.CREATE);
+
+        //内存映射文件
+        MappedByteBuffer inmapbufer = infileChannel.map(
+                FileChannel.MapMode.READ_ONLY, 0, infileChannel.size());
+        MappedByteBuffer outmapbufer = outfileChannle.map(
+                FileChannel.MapMode.READ_WRITE, 0, infileChannel.size());
+
+        //直接对缓冲区进行读写
+        byte[] by = new byte[inmapbufer.limit()];
+        inmapbufer.get(by);
+        outmapbufer.put(by);
+        infileChannel.close();
+        outfileChannle.close();
+    }
+
+    //利用通道完成文件的复制(非直接缓冲区)
+    @Test
+    public void test() {
+        FileInputStream fio = null;
+        FileOutputStream foo = null;
+        FileChannel channeli = null;
+        FileChannel channelo = null;
+        try {
+            fio = new FileInputStream("/home/pluto/Download/1.jpg");
+            foo = new FileOutputStream("/home/pluto/Download/2.jpg");
+            //1.获取通道
+            channeli = fio.getChannel();
+            channelo = foo.getChannel();
+            //2.分配指定大小缓冲区
+            ByteBuffer byteBuffer = ByteBuffer.allocate(1024);
+            //3.通道数据存入缓冲区
+            while (channeli.read(byteBuffer) != 1) {
+                byteBuffer.flip(); //切换读模式
+                channelo.write(byteBuffer);//缓冲区数据写入通道
+                byteBuffer.clear();//清空缓冲区
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (channelo != null) {
+                try {
+                    channelo.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (channeli != null) {
+                try {
+                    channeli.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (foo != null) {
+                try {
+                    foo.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (fio != null) {
+                try {
+                    fio.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+}
+```
 
 ## 4、文件通道
 
-## 5、非阻塞网络通信
+```java
+public class TestBlocking {
+    /**
+     * 使用nio核心
+     * - 通道连接channel
+     * java.nio.channels.channel
+     *  * |--FileChannel           本地
+     *  * |--SocketChannel　      网络(tcp)
+     *  * |--ServerSocketChannel  网络(tcp)
+     *  * |--DatagramChannel      网络(udp)
+     *  * |--Pipe.SinkChannel
+     *  * |--Pipe.SourceChannel
+     * - 缓冲区存数据buffer
+     * - 选择器selecttablechannel的多路复用器,用于监控复用器io状况
+     */
+    @Test
+    public void client() throws IOException {
+        //客户端
+        //获取通道
+        SocketChannel socketChannel = SocketChannel.open(
+                new InetSocketAddress("127.0.0.1",9999));
+        FileChannel inf = FileChannel.open(Paths.get(
+                "/home/pluto/Download/1.jpg"), StandardOpenOption.READ);
+        //分配指定大小缓冲区
+        ByteBuffer byteBuffers = ByteBuffer.allocate(1024*1024*4);
 
-## 6、管道
+        //读取文件发送到服务端
+        while (inf.read(byteBuffers) != -1){
+            byteBuffers.flip();
+            socketChannel.write(byteBuffers);
+            byteBuffers.clear();
+        }
+        //关闭通道
+        socketChannel.close();
 
-## 7、NIO2
+    }
+    @Test
+    public void server() throws IOException {
+        //服务端
+        //获取通道
+        ServerSocketChannel serverSocketChannel = ServerSocketChannel.open();
+        FileChannel outf = FileChannel.open(Paths.get(
+                "/home/pluto/Download/2.jpg"),
+                StandardOpenOption.WRITE,StandardOpenOption.CREATE);
+        //绑定端口
+        serverSocketChannel.bind(new InetSocketAddress(9999));
+        //获取客户端连接通道
+        SocketChannel socketChannel = serverSocketChannel.accept();
+        //分配指定大小缓冲区
+        ByteBuffer buf = ByteBuffer.allocate(1024*1024*4);
+        //读取客户端数据
+        while(socketChannel.read(buf) != -1){
+            buf.flip();
+            outf.write(buf);
+            buf.clear();
+        }
+        //关闭
+        socketChannel.close();
+        buf.clear();
+        serverSocketChannel.close();
+
+    }
+    @Test
+        public void client1() throws IOException {
+        //客户端
+        //获取通道
+        SocketChannel socketChannel = SocketChannel.open(
+                new InetSocketAddress("127.0.0.1",8888));
+        FileChannel inf = FileChannel.open(Paths.get(
+                "/home/pluto/Download/1.jpg"), StandardOpenOption.READ);
+        //分配指定大小缓冲区
+        ByteBuffer byteBuffers = ByteBuffer.allocate(1024);
+
+        //读取文件发送到服务端
+        while (inf.read(byteBuffers) != -1){
+            byteBuffers.flip();
+            socketChannel.write(byteBuffers);
+            byteBuffers.clear();
+        }
+        //告诉服务端我发挖了
+        socketChannel.shutdownOutput();
+        //接收服务器端反馈
+        int len = 0;
+        while((len = socketChannel.read(byteBuffers)) != -1){
+            byteBuffers.flip();
+            System.out.println(new String(byteBuffers.array(),0,len));
+            byteBuffers.clear();
+        }
+        //关闭通道
+        inf.close();
+        socketChannel.close();
+    }
+    @Test
+    public void server1() throws IOException {
+        //服务端
+        //获取通道
+        ServerSocketChannel serverSocketChannel = ServerSocketChannel.open();
+        FileChannel outf = FileChannel.open(Paths.get(
+                "/home/pluto/Download/2.jpg"),
+                StandardOpenOption.WRITE,StandardOpenOption.CREATE);
+        //绑定端口
+        serverSocketChannel.bind(new InetSocketAddress(8888));
+        //获取客户端连接通道
+        SocketChannel socketChannel = serverSocketChannel.accept();
+        //分配指定大小缓冲区
+        ByteBuffer buf = ByteBuffer.allocate(1024);
+        //读取客户端数据
+        while(socketChannel.read(buf) != -1){
+            buf.flip();
+            outf.write(buf);
+            buf.clear();
+        }
+        //发送反馈
+        buf.put("服务端就收数据成功".getBytes());
+        buf.flip();
+        socketChannel.write(buf);
+        //关闭
+        socketChannel.close();
+        outf.close();
+        serverSocketChannel.close();
+    }
+}
+```
+
+## 5、非阻塞网络通信(NIO2)
+
+```java
+public class TestNonBlocking {
+    @Test
+    public void client() throws IOException {
+        //客户端
+        //获取通道
+        SocketChannel ssChannel = SocketChannel.open(
+                new InetSocketAddress("127.0.0.1",8888));
+        //切换非阻塞模式
+        ssChannel.configureBlocking(false);
+        //分配指定大小缓冲区
+        ByteBuffer bf = ByteBuffer.allocate(1024);
+        //发送数据
+        Scanner scanner = new Scanner(System.in);
+        while (scanner.hasNext()){
+            String str = scanner.next();
+            bf.put((new Date().toString()+str).getBytes());
+            bf.flip();
+            ssChannel.write(bf);
+            bf.clear();
+        }
+//        bf.put(new Date().toString().getBytes());
+//        bf.flip();
+//        ssChannel.write(bf);
+//        bf.clear();
+        //关闭通道
+        ssChannel.close();
+    }
+    @Test
+    public void server() throws IOException {
+        //服务端
+        //获取通道
+        ServerSocketChannel ssChannel = ServerSocketChannel.open();
+        //q切换非阻塞
+        ssChannel.configureBlocking(false);
+        //绑定
+        ssChannel.bind(new InetSocketAddress(8888));
+        //获取选择器
+        Selector selector = Selector.open();
+        //通道注册到注册选择器,并指定监听事件
+        ssChannel.register(selector, SelectionKey.OP_ACCEPT);
+        //轮巡式获取已经准备就绪的选择器
+        while (selector.select() > 0){
+            //获取选中当前选择器注册的选择键
+            Iterator<SelectionKey> iterator = selector.selectedKeys().iterator();
+            while (iterator.hasNext()){
+                //获取准备就绪的事件
+                SelectionKey skey = iterator.next();
+                //判断具体是什么事件准备就绪
+                if(skey.isAcceptable()){
+                    //若就收就绪,获取客户端连接
+                    SocketChannel sChannel = ssChannel.accept();
+                    //切换非阻塞模式
+                    sChannel.configureBlocking(false);
+                    //通道注册到选择器
+                    sChannel.register(selector,SelectionKey.OP_READ);
+
+                }else if(skey.isReadable()){
+                    SocketChannel sChannel = (SocketChannel)skey.channel();
+                    //读取数据
+                    ByteBuffer bf = ByteBuffer.allocate(1024);
+                    int len = 0;
+                    while ((len = sChannel.read(bf)) > 0){
+                        bf.flip();
+                        System.out.println(new String(bf.array(),0,len));
+                        bf.clear();
+                    }
+                }
+            }
+            //用完取消选择键
+            iterator.remove();
+        }
+
+    }
+}
+```
