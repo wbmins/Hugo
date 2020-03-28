@@ -3,7 +3,7 @@
 : '
 uasr: wbmins
 mail: wbminions@gmail.com
-desc: a convenient git and hugo shell
+desc: a convenient git for hugo shell
 '
 
 : '
@@ -31,7 +31,16 @@ desc: created a hugo blog
 args: filename
 '
 new() {
-    hugo new posts/$1.md
+    while true; do
+        file_num=`echo ${num}|awk '{printf("%03d\n", $0)}'`
+        file="/home/pluto/github/Hugo/content/posts/${file_num}.md"
+        if test -f $file; then
+            let num+=1
+        else
+            hugo new posts/${file_num}.md
+            break
+        fi
+    done
 }
 
 if [ ! -z "$1" ]; then
@@ -39,7 +48,7 @@ if [ ! -z "$1" ]; then
         push "$2"
     fi
     if [ "$1" == "new" ]; then
-        new "$2"
+        new
     fi
     [ "$1" == "server" ] && server
 fi
