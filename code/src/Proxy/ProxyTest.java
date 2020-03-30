@@ -13,7 +13,14 @@ import java.util.List;
 public class ProxyTest {
 
     @Test
+    public void test(){
+        //静态代理
+        //代理类和被代理类在编译期间就确定下来了
+    }
+
+    @Test
     public void test1() {
+        //动态代理
         final List<String> list = new ArrayList<>();
         @SuppressWarnings("unchecked")
         List<String> proxyInstance = (List<String>) Proxy.newProxyInstance(

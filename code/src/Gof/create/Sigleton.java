@@ -1,17 +1,10 @@
 package Gof.create;
 
 /**
- * @Classname Sigtone
- * @Description 单例模式
- * @Date 2020/3/30 下午6:05
- * @Created by pluto
- */
-/**
- * 饿汉式(直接创建不管你需不需要)
- * 构造器私有化
- * 自行创建并用静态变量保存
- * 向外提供这个实例
- * 强调这是一个单例可以用final修饰
+ * ①饿汉式
+ * 是否 Lazy 初始化：否
+ * 是否多线程安全：是
+ * 实现难度：易
  */
 class Sigleton1 {
     public static final Sigleton1 INSTANCE = new Sigleton1();
@@ -22,46 +15,56 @@ class Sigleton1 {
     }
 }
 /**
- * 枚举:表示该类型的对象是有限的
- * 我们可以限定为一个就成为单例
+ * ②枚举:表示该类型的对象是有限的
+ * 是否 Lazy 初始化：否
+ * 是否多线程安全：是
+ * 实现难度：易
  */
 enum  Sigleton2 {
     INSTANCE
 }
 
 /**
- * 静态代码块 (适合复杂实例)
+ * ③懒汉式
+ * 是否 Lazy 初始化：是
+ * 是否多线程安全：否
+ * 实现难度：易
  */
 class Sigleton3 {
-    private static final Sigleton3 INSTANCE;
-    static {
-        INSTANCE = new Sigleton3();
-    }
+    private static Sigleton3 instance;
     private Sigleton3(){
     }
     public static Sigleton3 getInstance(){
-        return INSTANCE;
-    }
-}
-/**
- * 构造器私有化
- * 自行创建并用静态变量保存
- * 向外提供这个实例
- * 线程不安全 (单线程)
- */
-class Sigleton4 {
-    private static Sigleton4 instance;
-    private Sigleton4(){
-    }
-    public static Sigleton4 getInstance(){
         if(instance == null)
-            instance = new Sigleton4();
+            instance = new Sigleton3();
         return instance;
     }
 }
 
 /**
- * 线程安全 (多线程)
+ * ④懒汉式 静态代码块 (适合复杂实例)
+ * 是否 Lazy 初始化：是
+ * 是否多线程安全：是
+ * 实现难度：一般
+ */
+class Sigleton4 {
+    private static final Sigleton4 INSTANCE;
+    static {
+        INSTANCE = new Sigleton4();
+    }
+    private Sigleton4(){
+    }
+    public static Sigleton4 getInstance(){
+        return INSTANCE;
+    }
+}
+
+
+/**
+ * ⑤懒汉式
+ * 是否 Lazy 初始化：是
+ * 是否多线程安全：是
+ * 实现难度：易
  */
 class Sigleton5_1 {
     private static  Sigleton5_1 instance;
@@ -108,8 +111,15 @@ class Sigleton5_3 {
         return instance;
     }
 }
-//在内部类加载时才创建对象
-//静态内部类不会随着外部类初始化而初始化的,他是要单独加载和初始化的
+/**
+ * ⑥静态内部类
+ * 是否 Lazy 初始化：是
+ * 是否多线程安全：是
+ * 实现难度：一般
+ * 在内部类加载时才创建对象
+ * 静态内部类不会随着外部类初始化
+ * 而初始化的,他是要单独加载和初始化的
+ */
 class Sigleton6 {
     private Sigleton6(){
     }
