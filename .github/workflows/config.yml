@@ -19,7 +19,7 @@ jobs:
       uses: jakejarvis/hugo-build-action@master
     
     - name: Deploy to GitHub
-      uses: wbmins/Push-action@master
+      uses: wbmins/Push-Github-Pages@master
       with:
         GH_EMAIL: wbminions@gmail.com
         GH_USERNAME: wbmins
