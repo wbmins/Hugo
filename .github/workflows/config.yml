@@ -18,7 +18,7 @@ jobs:
     - name: Build site
       uses: jakejarvis/hugo-build-action@master
     
-    - name: Deploy to GitHub
+    - name: Deploy to GitHub Pages
       uses: wbmins/Push-Github-Pages@master
       with:
         GH_EMAIL: wbminions@gmail.com
