@@ -7,4 +7,4 @@
 ![Stars](https://img.shields.io/github/stars/wbmins/blog.svg)
 ![Slack](https://img.shields.io/badge/slack-996icu-green.svg?style=flat-square)
 
-这是 Pluto 的个人博客,地址：**<https://wbmins.github.io>**
+Pluto 的个人博客,地址：**<https://wbmins.github.io>**
