@@ -1,5 +1,5 @@
  
 [submodule "themes/LeaveIt"]
-	path = themes/LeaveIt
-	url = https://github.com/wbmins/LeaveIt.git
+	path = themes/voilet
+	url = https://github.com/wbmins/voilet.git
 	
