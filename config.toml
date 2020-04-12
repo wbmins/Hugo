@@ -28,13 +28,14 @@ preserveTaxonomyNames = true
     url = "/tags/"
     weight = 3
   [[menu.main]]
-    name = "Links"
-    url = "/links/"
-    weight = 4
-  [[menu.main]]
     name = "About"
     url = "/about/"
+    weight =4 
+  [[menu.main]]
+    name = "Mins"
+    url = "/mins/"
     weight = 5
+  
 [params]
     since = 2017
     author = "Pluto"                          # Author's name
