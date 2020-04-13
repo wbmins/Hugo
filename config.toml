@@ -30,7 +30,7 @@ preserveTaxonomyNames = true
   [[menu.main]]
     name = "About"
     url = "/about/"
-    weight =4 
+    weight = 4 
   [[menu.main]]
     name = "Mins"
     url = "/mins/"
@@ -53,16 +53,6 @@ preserveTaxonomyNames = true
     chineseZodiac = true   # 开启生肖图标
     iconBetweenYearAndAuthor = "heart"
     license= '本文采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可'
-[params.social]
-    # GitHub = "xxoo"
-    # Twitter = "xxoo"
-    # Email   = "xxoo"
-    # Instagram = "xxoo"
-    # Wechat = "/images/me/wechat.png"  # Wechat QRcode image
-    # Facebook = "xxoo"
-    # Telegram = "xxoo"
-    # Dribbble = "xxoo"
-    # Medium = "xxoo"
 [params.gitalk] # Github: https://github.com/gitalk/gitalk
     clientID = "f5e76418bd8e3bf4a8c2" # Your client ID
     clientSecret = "7aeb83fb9994132872a06111ae2e7e58e6a6207e" # Your client secret
