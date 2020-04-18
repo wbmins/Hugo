@@ -1,4 +1,4 @@
-# Pluto`s Blog Code
+# Pluto`s Blog
 
 [![OS](https://img.shields.io/badge/system%20-Manjaro-006633?&logo=manjaro)](https://manjaro.org/)
 ![Build](https://github.com/wbmins/Hugo/workflows/build/badge.svg)
