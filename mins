@@ -33,7 +33,7 @@ args: filename
 new() {
     while true; do
         file_num=`echo ${num}|awk '{printf("%03d\n", $0)}'`
-        file="/home/mins/Mine/Hugo/content/posts/${file_num}.md"
+        file="/home/mins/Mine/blog/content/posts/${file_num}.md"
         if test -f $file; then
             let num+=1
         else
