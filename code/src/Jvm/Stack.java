@@ -6,7 +6,7 @@ public class Stack {
         int i = 3;
         int m = i + j;
     }
-    /** 反编译得到的字节码
+    /** 反编译得到的字节码 javap -v xxx.class
      * Classfile /home/mins/Github/blog/code/out/production/code/Jvm/Stack.class
      *   Last modified 2020年5月15日; size 432 bytes
      *   MD5 checksum 01797e48b20acdebb384fc321527f3c2
