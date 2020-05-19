@@ -2,7 +2,6 @@ package Juc;
 
 import org.junit.Test;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -38,7 +37,7 @@ class MyThread implements Runnable {
 }
 
 class MyThread1 implements Runnable {
-    private AtomicInteger atomicInteger = new AtomicInteger(0);
+    private final AtomicInteger atomicInteger = new AtomicInteger(0);
 
     @Override
     public void run() {

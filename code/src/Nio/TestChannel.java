@@ -2,12 +2,14 @@ package Nio;
 
 import org.junit.Test;
 
-import java.io.*;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.RandomAccessFile;
 import java.nio.ByteBuffer;
 import java.nio.MappedByteBuffer;
 import java.nio.channels.FileChannel;
 import java.nio.charset.Charset;
-import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.util.Map;
@@ -51,13 +53,14 @@ public class TestChannel {
      */
     //字符集
     @Test
-    public void test6(){
+    public void test6() {
         Map<String, Charset> map = Charset.availableCharsets();
-        Set<Map.Entry<String,Charset>> set = map.entrySet();
-        for (Map.Entry<String,Charset> entry : set){
-            System.out.println(entry.getKey()+"==="+entry.getValue());
+        Set<Map.Entry<String, Charset>> set = map.entrySet();
+        for (Map.Entry<String, Charset> entry : set) {
+            System.out.println(entry.getKey() + "===" + entry.getValue());
         }
     }
+
     //分散读取聚集写入
     @Test
     public void test5() throws IOException {
@@ -71,7 +74,7 @@ public class TestChannel {
         ByteBuffer byteBuffer1 = ByteBuffer.allocate(1024);
 
         //分散读取
-        ByteBuffer[] bf = {byteBuffer,byteBuffer1};
+        ByteBuffer[] bf = {byteBuffer, byteBuffer1};
         //fileChannel.read(bf);
 
         //聚集写入

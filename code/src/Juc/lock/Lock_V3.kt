@@ -1,70 +1,67 @@
-package Juc.lock;
+package Juc.lock
 
-import org.junit.Test;
-
-import java.util.concurrent.BlockingQueue;
-import java.util.concurrent.SynchronousQueue;
-import java.util.concurrent.TimeUnit;
+import java.util.concurrent.BlockingQueue
+import java.util.concurrent.SynchronousQueue
+import java.util.concurrent.TimeUnit
 
 /**
  * @Classname Lock_V3
- * @Description TODO
  * @Date 2020/3/27 下午7:01
  * @Created by pluto
  */
-public class Lock_V3 {
-    public static void main(String[] args) {
-
-        BlockingQueue<String> blockingQueue = new SynchronousQueue<>();
-        new Thread(() -> {
+object Lock_V3 {
+    @JvmStatic
+    fun main(args: Array<String>) {
+        val blockingQueue: BlockingQueue<String> = SynchronousQueue()
+        Thread(Runnable {
             try {
-                System.out.println(Thread.currentThread().getName() +
-                        "------put 1");
-                blockingQueue.put("1");
-                System.out.println(Thread.currentThread().getName() +
-                        "------put 2");
-                blockingQueue.put("2");
-                System.out.println(Thread.currentThread().getName() +
-                        "------put 3");
-                blockingQueue.put("3");
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+                println(Thread.currentThread().name +
+                        "------put 1")
+                blockingQueue.put("1")
+                println(Thread.currentThread().name +
+                        "------put 2")
+                blockingQueue.put("2")
+                println(Thread.currentThread().name +
+                        "------put 3")
+                blockingQueue.put("3")
+            } catch (e: InterruptedException) {
+                e.printStackTrace()
             }
-        }, "AAA").start();
-        new Thread(() -> {
+        }, "AAA").start()
+        Thread(Runnable {
             try {
                 try {
-                    TimeUnit.SECONDS.sleep(3);
-                } catch (Exception e) {
-                    e.printStackTrace();
+                    TimeUnit.SECONDS.sleep(3)
+                } catch (e: Exception) {
+                    e.printStackTrace()
                 }
-                System.out.println(Thread.currentThread().getName() +
-                        "------" + blockingQueue.take());
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            try {
-                try {
-                    TimeUnit.SECONDS.sleep(3);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-                System.out.println(Thread.currentThread().getName() +
-                        "------" + blockingQueue.take());
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+                println(Thread.currentThread().name +
+                        "------" + blockingQueue.take())
+            } catch (e: InterruptedException) {
+                e.printStackTrace()
             }
             try {
                 try {
-                    TimeUnit.SECONDS.sleep(3);
-                } catch (Exception e) {
-                    e.printStackTrace();
+                    TimeUnit.SECONDS.sleep(3)
+                } catch (e: Exception) {
+                    e.printStackTrace()
                 }
-                System.out.println(Thread.currentThread().getName() +
-                        "------" + blockingQueue.take());
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+                println(Thread.currentThread().name +
+                        "------" + blockingQueue.take())
+            } catch (e: InterruptedException) {
+                e.printStackTrace()
             }
-        }, "BBB").start();
+            try {
+                try {
+                    TimeUnit.SECONDS.sleep(3)
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                }
+                println(Thread.currentThread().name +
+                        "------" + blockingQueue.take())
+            } catch (e: InterruptedException) {
+                e.printStackTrace()
+            }
+        }, "BBB").start()
     }
 }

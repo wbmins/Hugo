@@ -1,12 +1,7 @@
-package Collection;
+package Collection
 
-import org.junit.Test;
-
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.stream.Stream;
+import org.junit.Test
+import java.util.*
 
 /**
  * @Classname CollectionTest
@@ -14,77 +9,57 @@ import java.util.stream.Stream;
  * @Date 2020/3/24 下午3:47
  * @Created by pluto
  */
+internal class Person {
+    var id: Int? = null
+    var name: String? = null
 
-class Person{
-    Integer id;
-    String name;
-
-    public Person() {
+    constructor()
+    constructor(id: Int?, name: String?) {
+        this.id = id
+        this.name = name
     }
 
-    public Person(Integer id, String name) {
-        this.id = id;
-        this.name = name;
+    override fun hashCode(): Int {
+        var result = if (id != null) id.hashCode() else 0
+        result = 31 * result + if (name != null) name.hashCode() else 0
+        return result
     }
 
-    public Integer getId() {
-        return id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Person person = (Person) o;
-
-        if (!Objects.equals(id, person.id)) return false;
-        return Objects.equals(name, person.name);
-    }
-
-    @Override
-    public int hashCode() {
-        int result = id != null ? id.hashCode() : 0;
-        result = 31 * result + (name != null ? name.hashCode() : 0);
-        return result;
-    }
-
-    @Override
-    public String toString() {
+    override fun toString(): String {
         return "Person{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                '}';
+                '}'
+    }
+
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (javaClass != other?.javaClass) return false
+
+        other as Person
+
+        if (id != other.id) return false
+        if (name != other.name) return false
+
+        return true
     }
 }
 
-public class CollectionTest {
+class CollectionTest {
     @Test
-    public void test(){
-        HashSet<Person> hashSet = new HashSet<Person>();
-        Person p1 = new Person(1001,"AA");
-        Person p2 = new Person(1002,"BB");
-        hashSet.add(p1);
-        hashSet.add(p2);
-        System.out.println(hashSet);
-        p1.name = "CC";
-        hashSet.remove(p1);
-        System.out.println(hashSet);
-        hashSet.add(new Person(1001,"CC"));
-        System.out.println(hashSet);
-        hashSet.add(new Person(1001,"AA"));
-        System.out.println(hashSet);
+    fun test() {
+        val hashSet: HashSet<Person> = HashSet<Person>()
+        val p1: Person = Person(1001, "AA")
+        val p2: Person = Person(1002, "BB")
+        hashSet.add(p1)
+        hashSet.add(p2)
+        println(hashSet)
+        p1.name = "CC"
+        hashSet.remove(p1)
+        println(hashSet)
+        hashSet.add(Person(1001, "CC"))
+        println(hashSet)
+        hashSet.add(Person(1001, "AA"))
+        println(hashSet)
     }
 }

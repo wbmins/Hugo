@@ -1,8 +1,7 @@
-package Nio;
+package Nio
 
-import org.junit.Test;
-
-import java.nio.ByteBuffer;
+import org.junit.Test
+import java.nio.ByteBuffer
 
 /**
  * @Classname TestBuffer
@@ -10,7 +9,7 @@ import java.nio.ByteBuffer;
  * @Date 2020/3/27 下午10:15
  * @Created by pluto
  */
-public class TestBuffer {
+class TestBuffer {
     /**
      * 1.缓冲区
      * ByteBuffer
@@ -36,45 +35,40 @@ public class TestBuffer {
      * 可以提高效率
      */
     @Test
-    public void test(){
-        String str = "qwerty";
-        ByteBuffer byteBuffer = ByteBuffer.allocate(1024);
-        System.out.println("1.分配指定大小缓冲区---allocate---");
-        System.out.println(byteBuffer.position());
-        System.out.println(byteBuffer.limit());
-        System.out.println(byteBuffer.capacity());
-
-        byteBuffer.put(str.getBytes());
-        System.out.println("2.put存数据到缓冲区---put---");
-        System.out.println(byteBuffer.position());
-        System.out.println(byteBuffer.limit());
-        System.out.println(byteBuffer.capacity());
-
-        byteBuffer.flip();
-        System.out.println("3.切换读数据模式---flip---");
-        System.out.println(byteBuffer.position());
-        System.out.println(byteBuffer.limit());
-        System.out.println(byteBuffer.capacity());
-
-        byte[] bytes = new byte[byteBuffer.limit()];
-        byteBuffer.get(bytes);
-        System.out.println(new String(bytes,0,bytes.length));
-        System.out.println("4.get读取数据---get---");
-        System.out.println(byteBuffer.position());
-        System.out.println(byteBuffer.limit());
-        System.out.println(byteBuffer.capacity());
-
-        byteBuffer.rewind();
-        System.out.println("5.可重复读---rewind---");
-        System.out.println(byteBuffer.position());
-        System.out.println(byteBuffer.limit());
-        System.out.println(byteBuffer.capacity());
-
-        byteBuffer.clear();
+    fun test() {
+        val str = "qwerty"
+        val byteBuffer = ByteBuffer.allocate(1024)
+        println("1.分配指定大小缓冲区---allocate---")
+        println(byteBuffer.position())
+        println(byteBuffer.limit())
+        println(byteBuffer.capacity())
+        byteBuffer.put(str.toByteArray())
+        println("2.put存数据到缓冲区---put---")
+        println(byteBuffer.position())
+        println(byteBuffer.limit())
+        println(byteBuffer.capacity())
+        byteBuffer.flip()
+        println("3.切换读数据模式---flip---")
+        println(byteBuffer.position())
+        println(byteBuffer.limit())
+        println(byteBuffer.capacity())
+        val bytes = ByteArray(byteBuffer.limit())
+        byteBuffer[bytes]
+        println(String(bytes, 0, bytes.size))
+        println("4.get读取数据---get---")
+        println(byteBuffer.position())
+        println(byteBuffer.limit())
+        println(byteBuffer.capacity())
+        byteBuffer.rewind()
+        println("5.可重复读---rewind---")
+        println(byteBuffer.position())
+        println(byteBuffer.limit())
+        println(byteBuffer.capacity())
+        byteBuffer.clear()
         //但数据还在,处于被遗忘状态
-        System.out.println("6.清除缓冲区---clear---");
-        System.out.println(byteBuffer.position());
-        System.out.println(byteBuffer.limit());
-        System.out.println(byteBuffer.capacity());
+        println("6.清除缓冲区---clear---")
+        println(byteBuffer.position())
+        println(byteBuffer.limit())
+        println(byteBuffer.capacity())
     }
 }

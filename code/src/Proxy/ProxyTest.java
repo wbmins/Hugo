@@ -13,7 +13,7 @@ import java.util.List;
 public class ProxyTest {
 
     @Test
-    public void test(){
+    public void test() {
         //静态代理
         //代理类和被代理类在编译期间就确定下来了
     }

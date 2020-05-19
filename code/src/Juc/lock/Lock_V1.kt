@@ -1,10 +1,6 @@
-package Juc.lock;
+package Juc.lock
 
-import org.junit.Test;
-
-import java.util.concurrent.locks.Condition;
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantLock;
+import org.junit.Test
 
 /**
  * @Classname Lock_
@@ -12,65 +8,69 @@ import java.util.concurrent.locks.ReentrantLock;
  * @Date 2020/3/27 下午6:54
  * @Created by pluto
  */
-class MyData1{
-    private int num = 0;
-    public synchronized void inc(){
-        try{
-            while (num != 0){
-                this.wait(); //1. 等待不能生产
+internal class MyData1 {
+    private var num = 0
+    private val lock = java.lang.Object()
+
+    @Synchronized
+    fun inc() {
+        try {
+            while (num != 0) {
+//                this.wait() //1. 等待不能生产
+                lock.wait()
             }
-            num ++; //2. 生产
-            System.out.println(Thread.currentThread().getName()+
-                    "我是生产者,正在生产");
-           this.notifyAll(); //3. 通知
-        }catch (Exception e){
-            e.printStackTrace();
+            num++ //2. 生产
+            println(Thread.currentThread().name +
+                    "我是生产者,正在生产")
+//            this.notifyAll() //3. 通知
+            lock.notifyAll()
+        } catch (e: Exception) {
+            e.printStackTrace()
         }
     }
-    public synchronized void dec(){
-        try{
-            while (num == 0){
-                this.wait(); //1.等待不能消费
+
+    @Synchronized
+    fun dec() {
+        try {
+            while (num == 0) {
+//                this.wait() //1.等待不能消费
+                lock.wait()
             }
-            num --; //2. 消费
-            System.out.println(Thread.currentThread().getName()+
-                    "我是消费者,正在消费");
-            this.notifyAll();
-        }catch (Exception e){
-            e.printStackTrace();
+            num-- //2. 消费
+            println(Thread.currentThread().name +
+                    "我是消费者,正在消费")
+//            this.notifyAll()
+            lock.notifyAll()
+        } catch (e: Exception) {
+            e.printStackTrace()
         }
     }
 }
-public class Lock_V1 {
+
+class Lock_V1 {
     /**
      * 传统的生产者消费者第一个版本
      */
     @Test
-    public void tradtional() {
-        MyData1 myData = new MyData1();
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                for (int i = 0; i < 5; i++) {
-                    try{
-                        myData.inc();
-                    }catch (Exception e){
-                        e.printStackTrace();
-                    }
+    fun tradtional() {
+        val myData = MyData1()
+        Thread(Runnable {
+            for (i in 0..4) {
+                try {
+                    myData.inc()
+                } catch (e: Exception) {
+                    e.printStackTrace()
                 }
             }
-        },"AA").start();
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                for (int i = 0; i < 5; i++) {
-                    try{
-                        myData.dec();
-                    }catch (Exception e){
-                        e.printStackTrace();
-                    }
+        }, "AA").start()
+        Thread(Runnable {
+            for (i in 0..4) {
+                try {
+                    myData.dec()
+                } catch (e: Exception) {
+                    e.printStackTrace()
                 }
             }
-        },"BB").start();
+        }, "BB").start()
     }
 }

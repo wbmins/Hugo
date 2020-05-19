@@ -25,16 +25,16 @@ public class TestNonBlocking {
         //客户端
         //获取通道
         SocketChannel ssChannel = SocketChannel.open(
-                new InetSocketAddress("127.0.0.1",8888));
+                new InetSocketAddress("127.0.0.1", 8888));
         //切换非阻塞模式
         ssChannel.configureBlocking(false);
         //分配指定大小缓冲区
         ByteBuffer bf = ByteBuffer.allocate(1024);
         //发送数据
         Scanner scanner = new Scanner(System.in);
-        while (scanner.hasNext()){
+        while (scanner.hasNext()) {
             String str = scanner.next();
-            bf.put((new Date().toString()+str).getBytes());
+            bf.put((new Date().toString() + str).getBytes());
             bf.flip();
             ssChannel.write(bf);
             bf.clear();
@@ -46,6 +46,7 @@ public class TestNonBlocking {
         //关闭通道
         ssChannel.close();
     }
+
     @Test
     public void server() throws IOException {
         //服务端
@@ -60,29 +61,29 @@ public class TestNonBlocking {
         //通道注册到注册选择器,并指定监听事件
         ssChannel.register(selector, SelectionKey.OP_ACCEPT);
         //轮巡式获取已经准备就绪的选择器
-        while (selector.select() > 0){
+        while (selector.select() > 0) {
             //获取选中当前选择器注册的选择键
             Iterator<SelectionKey> iterator = selector.selectedKeys().iterator();
-            while (iterator.hasNext()){
+            while (iterator.hasNext()) {
                 //获取准备就绪的事件
                 SelectionKey skey = iterator.next();
                 //判断具体是什么事件准备就绪
-                if(skey.isAcceptable()){
+                if (skey.isAcceptable()) {
                     //若就收就绪,获取客户端连接
                     SocketChannel sChannel = ssChannel.accept();
                     //切换非阻塞模式
                     sChannel.configureBlocking(false);
                     //通道注册到选择器
-                    sChannel.register(selector,SelectionKey.OP_READ);
+                    sChannel.register(selector, SelectionKey.OP_READ);
 
-                }else if(skey.isReadable()){
-                    SocketChannel sChannel = (SocketChannel)skey.channel();
+                } else if (skey.isReadable()) {
+                    SocketChannel sChannel = (SocketChannel) skey.channel();
                     //读取数据
                     ByteBuffer bf = ByteBuffer.allocate(1024);
                     int len = 0;
-                    while ((len = sChannel.read(bf)) > 0){
+                    while ((len = sChannel.read(bf)) > 0) {
                         bf.flip();
-                        System.out.println(new String(bf.array(),0,len));
+                        System.out.println(new String(bf.array(), 0, len));
                         bf.clear();
                     }
                 }
