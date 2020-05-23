@@ -6,6 +6,8 @@ import org.junit.Test;
 import java.util.Arrays;
 import java.util.List;
 
+import static Sort.Util.*;
+
 public class HeapSort implements Sort {
 
     private static class Heap<T extends Comparable<T>> {
@@ -16,12 +18,17 @@ public class HeapSort implements Sort {
             this.heap = heap;
         }
 
+        /**
+         * 一次堆调整
+         * @param position 待调整元素位置
+         * @param length   待调整数组长度
+         */
         private void AdjustDown(int position, int length) {
             T t = heap[0];
             heap[0] = heap[position];
             for (int i = 2*position; i <= length; i *= 2) {
-                if(i < length && (heap[i].compareTo(heap[i+1]) < 0)) i++;
-                if(heap[0].compareTo(heap[i]) >=0) break;
+                if(i < length && less(heap[i],heap[i + 1])) i++;
+                if(more(heap[0],heap[i]) || equal(heap[0],heap[i])) break;
                 heap[position] = heap[i];
                 position = i;
             }
@@ -29,6 +36,9 @@ public class HeapSort implements Sort {
             heap[0] = t;
         }
 
+        /**
+         * 建大根堆
+         */
         private void BuildMaxHeap() {
             for (int i = (heap.length - 1)/2; i > 0; i--)
                 AdjustDown(i,heap.length);
@@ -47,15 +57,11 @@ public class HeapSort implements Sort {
     @Override
     public <T extends Comparable<T>> List<T> sort(List<T> unsorted) {
         int size = unsorted.size() - 1;
-
         Heap<T> heap = new Heap<>(unsorted.toArray((T[]) new Comparable[unsorted.size()]));
-
+        //建大根堆
         heap.BuildMaxHeap();
-
         for (int i = size; i > 1; i--) {
-            T t = heap.heap[i];
-            heap.heap[i] = heap.heap[1];
-            heap.heap[1] = t;
+            //调整堆顶元素，数组长度减一
             heap.AdjustDown(1,i - 1);
         }
         return Arrays.asList(heap.heap);
