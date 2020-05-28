@@ -5,7 +5,7 @@ on:
       - master
 
 jobs:
-  checkout:
+  checkout-build:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout
@@ -13,16 +13,12 @@ jobs:
       with:
           submodules: true
           fetch-depth: 1
-  
-  build:
-    needs: checkout
-    runs-on: ubuntu-latest
     steps:
     - name: Build site
       uses: jakejarvis/hugo-build-action@master
     
   deploy:
-    needs: build
+    needs: checkout-build
     runs-on: ubuntu-latest
     steps:
     - name: Deploy to GitHub Pages
