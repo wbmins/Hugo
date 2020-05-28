@@ -5,19 +5,26 @@ on:
       - master
 
 jobs:
-  build-and-deploy:
+  checkout:
     runs-on: ubuntu-latest
     steps:
-
     - name: Checkout
       uses: actions/checkout@master
       with:
           submodules: true
           fetch-depth: 1
-    
+  
+  build:
+    needs: checkout
+    runs-on: ubuntu-latest
+    steps:
     - name: Build site
       uses: jakejarvis/hugo-build-action@master
     
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
     - name: Deploy to GitHub Pages
       uses: wbmins/Push-Github-Pages@master
       with:
