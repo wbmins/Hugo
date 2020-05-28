@@ -1,11 +1,14 @@
-name: build
-on:
-  push: # push的时候触发
-    branches: # 那些分支需要触发
-      - master
+name: Pluto`s Blog
+on: push
+
+env:
+  GH_USERNAME: wbmins
+  GH_EMAIL: wbminions@gmail.com
+  GH_REPO: github.com/wbmins/wbmins.github.io
+  GH_BRANCH: master
 
 jobs:
-  build-and-deploy:
+  build:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout
@@ -14,18 +17,38 @@ jobs:
           submodules: true
           fetch-depth: 1
     - name: Build site
-      uses: jakejarvis/hugobuild--action@master
-  
-  deploy:
-    needs: build-and-deploy
-    runs-on: ubuntu-latest
-    steps:
-    - name: Deploy to GitHub Pages
-      uses: wbmins/Push-Github-Pages@master
+      uses: jakejarvis/hugo-build-action@master
       with:
-        GH_EMAIL: wbminions@gmail.com
-        GH_USERNAME: wbmins
-        GH_REPO: github.com/wbmins/wbmins.github.io
-        GH_BRANCH: master
-        GH_TOKEN: ${{ secrets.DEPLOY_TOKEN }}
-        WORK_DIR: "./public"
+        args: --minify
+    - name: Upload Artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: site
+        path: public
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    container:
+      image: alpine/git
+    steps:
+    - name: Download Artifact
+      uses: actions/download-artifact@v2
+      with:
+        name: site
+    - name: Setup git
+      run: |
+        git config --global user.name "${GH_USERNAME}"
+        git config --global user.email "${GH_EMAIL}"
+    - name: Deploy to GitHub
+      run: |
+        git init && git add .
+        for try in $(seq 10); do
+          git commit -m "Build By GitHub Actions on $(date "+%Y-%m-%d %T")"
+          if git push -f "https://${{ secrets.DEPLOY_TOKEN }}@${GH_REPO}" master:${GH_BRANCH}; then
+            exit 0
+          else
+            sleep $(shuf -i 3-10 -n 1)
+          fi
+        done
+        exit 1
