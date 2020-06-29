@@ -1,5 +1,4 @@
- 
-[submodule "themes/violet"]
+ [submodule "themes/violet"]
 	path = themes/violet
 	url = https://github.com/wbmins/violet.git
 	
