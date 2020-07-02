@@ -79,4 +79,4 @@ preserveTaxonomyNames = true
     visitor = true
     pageSize = 10 # comment list page size
     bg = '/images/me/avatar.png' # valine background
-    count = false # top_img顯示評論數
+    count = false # top_img显示评论数
