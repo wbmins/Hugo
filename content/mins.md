@@ -6,13 +6,13 @@ featured_image: #顶部图片
 description:  #描述
 ---
 
-## Interesting
+## Some
 
 - **Github Repositories Ranking** &nbsp;&nbsp;&nbsp;&nbsp; [:earth_asia:](https://gitstar-ranking.com/repositories)
 
 - **Programming Language Ranking** &nbsp;&nbsp;&nbsp;&nbsp; [:chart_with_upwards_trend:](https://www.tiobe.com/tiobe-index/)
 
-## Tools
+## Tool
 
 - **MikuTools** &nbsp;&nbsp;&nbsp;&nbsp; [:wrench:](https://tools.miku.ac/en)
 
