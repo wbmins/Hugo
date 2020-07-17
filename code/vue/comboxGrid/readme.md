@@ -2,4 +2,4 @@
 
 > a comboxGrid for element
 
-## [example](https://github.com/wbmins/blog/blob/master/code/vue/comboxGrid/demo.vue)
+## [Example](https://github.com/wbmins/blog/blob/master/code/vue/comboxGrid/demo.vue)
