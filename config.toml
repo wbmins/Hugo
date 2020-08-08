@@ -78,5 +78,5 @@ preserveTaxonomyNames = true
     placeholder = '说点什么吧...'
     visitor = true
     pageSize = 10 # comment list page size
-    bg = '/images/me/avatar.png' # valine background
+    bg = './images/me/avatar.png' # valine background
     count = false # top_img显示评论数
