@@ -1,6 +1,6 @@
 package Nio;
 
-import org.junit.Test;
+
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -52,7 +52,7 @@ public class TestChannel {
      * |--字符数据到字符串
      */
     //字符集
-    @Test
+
     public void test6() {
         Map<String, Charset> map = Charset.availableCharsets();
         Set<Map.Entry<String, Charset>> set = map.entrySet();
@@ -62,7 +62,7 @@ public class TestChannel {
     }
 
     //分散读取聚集写入
-    @Test
+
     public void test5() throws IOException {
         RandomAccessFile raf = new RandomAccessFile(
                 "/home/pluto/Download/1.jpg", "rw");
@@ -85,7 +85,7 @@ public class TestChannel {
     }
 
     //通道数据传输(直接缓冲区)
-    @Test
+
     public void test3() throws IOException {
         FileChannel infileChannel = FileChannel.open(Paths.get(
                 "/home/pluto/Download/1.jpg"), StandardOpenOption.READ);
@@ -101,7 +101,7 @@ public class TestChannel {
     }
 
     //使用直接缓冲区完成文件复制(内存映射文件)
-    @Test
+
     public void test1() throws IOException {
         FileChannel infileChannel = FileChannel.open(Paths.get(
                 "/home/pluto/Download/1.jpg"), StandardOpenOption.READ);
@@ -124,7 +124,7 @@ public class TestChannel {
     }
 
     //利用通道完成文件的复制(非直接缓冲区)
-    @Test
+
     public void test() {
         FileInputStream fio = null;
         FileOutputStream foo = null;

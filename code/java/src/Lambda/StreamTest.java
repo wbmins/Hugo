@@ -1,6 +1,5 @@
 package Lambda;
 
-import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -29,7 +28,7 @@ public class StreamTest {
         return list;
     }
 
-    @Test
+
     public void test1(){
         //1.集合创建Stream
         Stream<User> st = getUsers().stream(); //返回一个顺序流(拿数据按照顺序拿)
@@ -46,7 +45,6 @@ public class StreamTest {
         Stream.generate(Math::random).limit(10).forEach(System.out::println);
     }
 
-    @Test
     public void test2(){
         //filter() 接受Lambda,从流中排除某些元素
         Stream<User> stream1 = getUsers().stream();
@@ -61,7 +59,7 @@ public class StreamTest {
         Stream<User> stream4 = getUsers().stream();
         stream4.distinct().forEach(System.out::println);
     }
-    @Test
+
     public void test4(){
         //映射
         List<String > list = Arrays.asList("aa","bb","cc","dd");

@@ -1,6 +1,5 @@
 package Lambda;
 
-import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -16,7 +15,6 @@ import java.util.function.Predicate;
  */
 public class LambdaTest {
 
-    @Test
     public void test1() {
         Runnable r1 = new Runnable() {
             @Override
@@ -30,7 +28,6 @@ public class LambdaTest {
         r2.run();
     }
 
-    @Test
     public void test2() {
         Comparator<Integer> comparator = new Comparator<Integer>() {
             @Override
@@ -64,7 +61,6 @@ public class LambdaTest {
         return list1;
     }
 
-    @Test
     public void test3() {
         List<String> list = Arrays.asList("南京", "天京");
         List<String> filterstr = filterString(list, new Predicate<String>() {
@@ -89,7 +85,6 @@ public class LambdaTest {
         Comparator<String> compa = String::compareTo;
     }
 
-    @Test
     public void test5() {
         Function<Integer, String[]> fun = length -> new String[length];
         fun.apply(5);
@@ -98,7 +93,6 @@ public class LambdaTest {
         Function<Integer, String[]> fun2 = String[]::new;
     }
 
-    @Test
     public void test() {
 //
 //        File sys = new File("/home/pluto/Download/1.jpg");

@@ -1,6 +1,5 @@
 package Nio;
 
-import org.junit.Test;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
@@ -20,7 +19,7 @@ import java.util.Scanner;
  * @Created by pluto
  */
 public class TestNonBlocking {
-    @Test
+
     public void client() throws IOException {
         //客户端
         //获取通道
@@ -47,7 +46,7 @@ public class TestNonBlocking {
         ssChannel.close();
     }
 
-    @Test
+
     public void server() throws IOException {
         //服务端
         //获取通道
