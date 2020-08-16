@@ -3,5 +3,7 @@ public/*
 resources/*
 .vscode/*
 *.iml
-/code/.idea/
-/code/out/
+/code/java/.idea/
+/code/java/out/
+*.class
+*.xml
