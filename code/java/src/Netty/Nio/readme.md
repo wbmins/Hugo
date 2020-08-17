@@ -29,3 +29,33 @@
 3. position 下一个要被读/写元素的位置
 
 4. mark 标记
+
+#### Selector
+
+1. 多个 channel 注册到 selector
+
+2. 只有在连接通道真正由读写事件发生时，才进行读写，
+
+3. 避免上下文切换
+
+#### 非阻塞
+
+1. 当客户端连接时，会通过 ServerSocketChannel 得到 SocketChannel
+
+2. 将 SocketChannel 注册到 Selector 上，register
+
+3. 注册后返回 SectionKey，会和 Selector 关联
+
+4. Selector 进行监听 select 方法，返回有事件发生通道的个数
+
+5. 进一步得到各个 SelectionKey （有事件发生）
+
+6. 通过 SelectionKey 的channel() 反向获取 SocketChannel 
+
+7. 通过得到 channel 完成业务处理
+
+
+
+
+6. 
+
