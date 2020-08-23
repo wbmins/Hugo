@@ -1,4 +1,4 @@
-# Pluto`s Blog
+## Pluto`s Blog
 
 [![OS](https://img.shields.io/badge/System%20-ArchLinux-006633?&logo=Arch%20Linux)](https://www.archlinux.org/)
 ![Build](https://github.com/wbmins/blog/workflows/Pluto%60s%20Blog/badge.svg??event=push)
