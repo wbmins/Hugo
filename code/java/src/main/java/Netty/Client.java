@@ -33,8 +33,6 @@ public class Client {
         NioEventLoopGroup group = new NioEventLoopGroup();
 
         try {
-
-
             Bootstrap bootstrap = new Bootstrap()
                     .group(group)
                     .channel(NioSocketChannel.class)
@@ -42,7 +40,6 @@ public class Client {
 
                         @Override
                         protected void initChannel(SocketChannel sc) throws Exception {
-
                             //得到pipeline
                             ChannelPipeline pipeline = sc.pipeline();
                             //加入解码器
@@ -51,7 +48,6 @@ public class Client {
                             pipeline.addLast("encoder", new StringEncoder());
                             //自定义业务处理handler
                             pipeline.addLast(new ClientHandler());
-
                         }
                     });
             ChannelFuture channelFuture = bootstrap.connect(host, port).sync();
@@ -71,7 +67,9 @@ public class Client {
     }
 
     public static void main(String[] args) throws InterruptedException {
+
         new Client("127.0.0.1", 7000).run();
+
     }
 
 }
