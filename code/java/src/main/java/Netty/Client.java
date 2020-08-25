@@ -31,13 +31,11 @@ public class Client {
     public void run() throws InterruptedException {
 
         NioEventLoopGroup group = new NioEventLoopGroup();
-
         try {
             Bootstrap bootstrap = new Bootstrap()
                     .group(group)
                     .channel(NioSocketChannel.class)
                     .handler(new ChannelInitializer<SocketChannel>() {
-
                         @Override
                         protected void initChannel(SocketChannel sc) throws Exception {
                             //得到pipeline
