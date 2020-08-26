@@ -1,17 +1,17 @@
 <template>
   <div class="home">
     <combox-grid
-        :dataSource="list"
-        :visible="visible"
-        @selectItem="selectItem"
-        :columnName="columnName"
-        :columns="columns"
+      :dataSource="list"
+      :visible="visible"
+      @selectItem="selectItem"
+      :columnName="columnName"
+      :columns="columns"
     >
       <div slot="hello">
         <el-input placeholder="请输入内容" v-model="name" @focus="handleFocus" @blur="handleBlur"></el-input>
       </div>
     </combox-grid>
-    <div>parent value: {{name}}</div>
+    <div>parent value: {{ name }}</div>
   </div>
 </template>
 

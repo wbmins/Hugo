@@ -8,7 +8,7 @@
         @row-dblclick="onDblClickSelect"
       >
         <el-table-column
-          v-for="(item) in columns"
+          v-for="item in columns"
           :key="item.field"
           :prop="item.field"
           :label="item.title"
