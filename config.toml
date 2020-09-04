@@ -1,7 +1,7 @@
 baseURL = "https://wbmins.github.io" # 博客地址
 title = "Pluto`s Blog" # 浏览器的标题
 languageCode = "zh-cn" # 语言
-hasCJKLanguage = true # 开启可以让「字数统计」统计汉字
+hasCJKLanguage = true # 字数统计
 theme = "violet" # 主题
 paginate = 11 # 每页的文章数
 enableEmoji = true # 支持 Emoji
