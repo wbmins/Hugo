@@ -65,18 +65,3 @@ preserveTaxonomyNames = true
     pagerDirection= "last" # Comment sorting direction, available values are 'last' and 'first'.
     createIssueManually= true # If it is 'false', it is auto to make a Github issue when the administrators login.
     distractionFreeMode= false # Enable hot key (cmd|ctrl + enter) submit comment.
-# Valine.
-  # You can get your appid and appkey from https://leancloud.cn
-  # more info please open https://valine.js.org
-  [params.valine]
-    enable = true
-    appId = 'UykWYSyDvR8ypSWopSPPmyTI-gzGzoHsz'
-    appKey = 'IvnGNcm8NUYCbJ7xKKIr6nMn'
-    notify = false  # mail notifier , https://github.com/xCss/Valine/wiki
-    verify = false # Verification code
-    avatar = 'monsterid'
-    placeholder = '说点什么吧...'
-    visitor = true
-    pageSize = 10 # comment list page size
-    bg = './images/me/avatar.png' # valine background
-    count = false # top_img显示评论数
