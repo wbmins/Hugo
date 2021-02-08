@@ -54,8 +54,8 @@ preserveTaxonomyNames = true
     iconBetweenYearAndAuthor = "heart"
     license= '本文采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可'
 [params.gitalk] # Github: https://github.com/gitalk/gitalk
-    clientID = "8cab89ac21d1b2919ac6" # Your client ID
-    clientSecret = "1d0339ce4d42e2e6f5c70843c3ac26137956c553" # Your client secret
+    clientID = "7e5274d7c8d13ac7cb2d" # Your client ID
+    clientSecret = "94e0bba760f6ac8286cca35a99ccaa7b7d7b9da6" # Your client secret
     repo = "blog-comment" # The repo to store comments
     owner = "wbmins" # Your GitHub ID
     admin= ["wbmins"] # Required. Github repository owner and collaborators. (Users who having write access to this repository)
